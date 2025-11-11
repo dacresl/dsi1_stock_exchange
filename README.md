@@ -6,9 +6,7 @@
 
 - Fay Kisteroff  
 - Olena Peleshko  
-- Nneka Asuzu  
 - Deanne Acres-Lans  
-- Ruchira Malhotra  
 
 ---
 
