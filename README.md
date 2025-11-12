@@ -18,6 +18,11 @@ Stock market movements are influenced by various factors, and predicting short-t
 
 This project addresses the problem of predicting the direction of the next day's closing price using historical data.
 
+We will be using a combination of 10-day and 21-day MA (commonly used date ranges in trading) and trading volume to see if we can predict stock price. 
+•	10-day MA is an indicator for short term volatility/price changes
+•	21-day MA reflects longer term trends
+•	Volume reflects market participation and sentiment, high volume can be an indicator of volatility
+
 ### 🎯 Goal
 
 To use moving average (MA) and volume as predictors of stock price movement, and analyze how these indicators behave in the context of broader market volatility (e.g., the COVID-19 pandemic).
@@ -41,25 +46,32 @@ To use moving average (MA) and volume as predictors of stock price movement, and
 
 ### 🕰️ Timeframes Compared
 
-- **Pre-COVID:** Mar 2019 – Feb 2020  
+- **Pre-COVID:** Jan 2018 – Feb 2020  
 - **Post-COVID:** Mar 2020 – May 2021  
 
 ---
 
 ## 🔬 Methodology
 
-1. Clean and filter data  
-2. Remove missing values  
-3. Ensure date continuity (account for market closures)  
-4. Filter for selected indexes  
-5. Calculate 10-day and 21-day MAs per index  
-6. Split data into train/test sets (chronological order preserved)  
-7. Use 5-fold time-series cross-validation (rolling window)  
-8. Train logistic regression models:  
-   - **Model 1:** 10-day MA + Volume  
-   - **Model 2:** 21-day MA + Volume  
-9. Standardize volume and MA features  
-10. Evaluate using AUC curves and confusion matrices  
+1.	Clean/filter data
+-	Remove missing values
+-	Continuity for dates (market closures)
+-	Filter out only useful indexes 
+2.	Calculate 10 and 21 day MAs per index
+3.	Split data into test/train
+-  Include all selected indexes so the model is trained on all 3
+-  Making sure to keep chronological order
+4.	5-fold cross validation 
+-  Timeseries based
+-  Rolling window validation
+5.	Train the model using random forest classification
+6.	Run the model:
+- Pre-processing: standardize volume and MAs
+- Features of the model:
+    - 10-day MA
+    - 21-day MA
+    - Volume
+7.	Compute and plot AUC curves and confusion matrixes
 
 ---
 
@@ -78,7 +90,7 @@ To use moving average (MA) and volume as predictors of stock price movement, and
 
 ## 📌 Project Scope
 
-Develop a classification model to determine whether the 10-day or 21-day MA combined with trading volume is a better predictor of stock price movement. The project includes:
+Develop a classification model to determine if the 10-day and 21-day MA combined with trading volume is a predictor of stock price movement, and if this model can be applied to high volatility time periods such as during the Covid Pandemic. The project includes:
 
 - Data preprocessing  
 - Model training  
@@ -129,16 +141,36 @@ Dataset reduced to only relevant indexes and timeframes, improving focus and ana
 
 ---
 
-## 📉 Regression Analysis and Validation
+## 📉 Classification Analysis and Validation
 
 - **Objective:**  
-  *(To be completed)*
+1. To train and build a machine learning model that can use 10 day moving average, 21 day moving average, and volume to predict whether the stock price will go up or down.
 
 - **Method:**  
-  *(To be completed)*
+1. define the features and target for the model (x and y variables)
+2. split the dataset 80/20 to keep some holdout data for the test set
+3. use ColumnTransformer, StandardScaler, and OneHotEncorder to transform the data and wrap in preprocessing pipeline
+4. define the Random Forest Classifier model and combine with preprocessing pipeline
+5. cross-validate with a TimeSeriesSplit to keep temporal order
 
 - **Results:**  
-  *(To be completed)*
+
+Pre-covid train/test:
+
+AUC ROC = 0.553
+
+| measure  | down value (0) | up value (1) | 
+|----------|----------------|--------------|
+|precision |      0.66      |    0.41      |
+|recall    |      0.55      |    0.53      | 
+|f1        |      0.60      |    0.46      | 
+
+Post-covid:
+
+AUC ROC = 0.522
+Precision = 0.421
+Recall = 0.180
+
 
 ---
 
@@ -155,3 +187,4 @@ Dataset reduced to only relevant indexes and timeframes, improving focus and ana
 | Fay Kisteroff     |       |
 | Olena Peleshko    |       |
 | Deanne Acres-Lans |       |
+
