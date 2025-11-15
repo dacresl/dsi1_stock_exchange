@@ -74,6 +74,25 @@ To use moving average (MA) and volume as predictors of stock price movement, and
 7.	Compute and plot AUC curves and confusion matrixes
 
 ---
+⚠️ Risks & Limitations
+
+While the methodology is well‑defined, several risks and potential issues should be acknowledged:
+
+- **Data Availability:**
+  - Missing data during market closures, holidays, or trading halts may introduce gaps that affect model accuracy.
+
+- **Historical Assumptions:**
+  - The analysis assumes that historical patterns will continue to hold.
+  - Structural shifts (e.g., COVID‑19 pandemic, regulatory changes, geopolitical events) can invalidate these assumptions.
+
+- **Market Complexity:**
+ - Stock prices are influenced by many interacting variables (macroeconomic indicators, sentiment, global events) beyond the features currently used.
+ - Simplified models may fail to capture nonlinear relationships.
+
+- **Model Generalizability:**
+ - Performance may vary across different time periods or regimes (e.g., pre‑COVID vs. post‑COVID).
+
+---
 
 ## 🛠️ Technical Stack
 
@@ -83,9 +102,10 @@ To use moving average (MA) and volume as predictors of stock price movement, and
   - `pandas`: data analysis  
   - `matplotlib`: graphs and plots  
   - `seaborn`: enhanced visualizations  
-  - `sklearn`: model training and AUC ROC visualization
+  - `sklearn`: model training, AUC ROC visualization, Confusion Matri
   - `kagglehub`: interaction with Kaggle data sets
-
+  - `pickle`: save and load trained machine learning models
+    
 ---
 
 ## 📌 Project Scope
@@ -128,19 +148,6 @@ Dataset reduced to only relevant indexes and timeframes, improving focus and ana
 
 ---
 
-## 📈 Exploratory Analysis
-
-- **Objective:**  
-  *(To be completed)*
-
-- **Method:**  
-  *(To be completed)*
-
-- **Results:**  
-  *(To be completed)*
-
----
-
 ## 📉 Classification Analysis and Validation
 
 - **Objective:**  
@@ -176,7 +183,29 @@ Recall = 0.174
 
 ## ✅ Conclusion
 
-*(To be completed)*
+📌 The current model fails to reliably predict stock direction. 
+- The model's AUC ROC scores of 0.553 and 0.522 show that the model's accuracy is just above random guessing, which would have a score of 0.5. A "good" AUC ROC would be = ≥ 0.8. - The model is better at predicting down movements than up movements.
+- The model performed better on pre-COVID data than post-COVID data suggesting the model cannot adapt to structural market changes.
+
+🔑 Key Takeaways
+- The model is not robust across different market regimes (pre- vs. post-COVID).
+- Poor accuracy does not mean that the selected variables have no value, signals may exist but require more sophisticated modeling.
+- Financial prediction tasks demand richer feature engineering and advanced algorithms to uncover hidden patterns.
+- Iterative experimentation is essential to refine models and avoid overfitting simplistic assumptions.
+
+
+⚠️ Several key challenges emerged:
+
+- Prediction Limitations: The model does not consistently predict market movements.
+- Feature Constraints: Individual features alone cannot represent the complexity of financial markets.
+- Market Complexity: Stock price changes are driven by many interacting variables beyond those used in the model.
+- Data Imbalance: The dataset contains more “up” cases than “down,” which skews accuracy.
+
+
+🚀 Areas for Improvement
+- Incorporate more complex features such as momentum indicators and lagged returns.
+- Optimize Random Forest hyperparameters via GridSearchCV.
+- Explore alternative models like XGBoost for nonlinear patterns.
 
 ---
 
