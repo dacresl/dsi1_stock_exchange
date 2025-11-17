@@ -178,6 +178,23 @@ AUC ROC = 0.526
 Precision = 0.451
 Recall = 0.174
 
+---
+
+## 📉 Visualizations
+- **Objective:**
+  
+To create easy to underatand data visualizations representing the accuracy of our machine learning model.
+
+- **Method:**
+
+
+- **Results:**  
+ROC Curves:
+
+Confusion Matrixes:
+
+Precision Recall Curves
+
 
 ---
 
